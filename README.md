@@ -10,4 +10,4 @@ Only tested on Psych Engine icons but should work for any icon sheet that is 150
 * Selection of specific sprites for extraction (Currently processes entire folders).
 * Improved user interface for enhanced usability.
 
-**Download**: [Get the executable here]()
+**Download**: [Get the executable here](https://github.com/MeguminBOT/FNF-Icon-Splitter/releases)
