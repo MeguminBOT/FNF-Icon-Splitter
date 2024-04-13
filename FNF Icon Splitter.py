@@ -3,7 +3,35 @@ import re
 import tkinter as tk
 from tkinter import filedialog, ttk, messagebox
 from PIL import Image
-import xml.etree.ElementTree as ET
+import webbrowser
+import requests
+import sys
+
+## Update Checking
+def check_for_updates(current_version):
+    try:
+        response = requests.get('https://raw.githubusercontent.com/MeguminBOT/FNF-Icon-Splitter/main/latestVersion.txt')
+        latest_version = response.text.strip()
+
+        if latest_version > current_version:
+            root = tk.Tk()
+            root.withdraw()
+            result = messagebox.askyesno("Update available", "An update is available. Do you want to download it now?")
+            if result:
+                print("User chose to download the update.")
+                webbrowser.open('https://github.com/MeguminBOT/FNF-Icon-Splitter/releases/latest')
+                sys.exit()
+            else:
+                print("User chose not to download the update.")
+            root.destroy()
+        else:
+            print("You are using the latest version of the application.")
+    except requests.exceptions.RequestException as err:
+        print ("No internet connection or something went wrong, could not check for updates.")
+        print ("Error details:", err)
+
+current_version = '1.0.0'
+check_for_updates(current_version)
 
 ## File processing
 def count_png_files(input_dir):
@@ -63,7 +91,7 @@ def split_icons(input_dir, save_location, progress_var, root):
 ## Graphical User Interface setup
 root = tk.Tk()
 root.title("FNF Icon Splitter")
-root.geometry("640x400")
+root.geometry("480x320")
 
 progress_var = tk.DoubleVar()
 progress_bar = ttk.Progressbar(root, length=200, variable=progress_var)
@@ -88,6 +116,15 @@ process_button.pack(pady=8)
 
 author_label = tk.Label(root, text="Tool written by AutisticLulu")
 author_label.pack(side='bottom')
+
+## Source Code
+def contributeLink(url):
+    webbrowser.open_new(url)
+
+linkSourceCode = "https://github.com/MeguminBOT/FNF-Icon-Splitter"
+link1 = tk.Label(root, text="If you wish to contribute to the project, click here!", fg="blue", cursor="hand2")
+link1.pack(side='bottom')
+link1.bind("<Button-1>", lambda e: contributeLink(linkSourceCode))
 
 ## Main loop
 root.mainloop()
