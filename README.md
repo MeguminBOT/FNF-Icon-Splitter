@@ -1,3 +1,5 @@
+# Archived as the same functionality is now possible in https://github.com/MeguminBOT/TextureAtlas-to-GIF-and-Frames
+
 # FNF Icon Splitter
 This tool simplifies the process of extracting frames from icon spritesheets, organizing them into individual folders. 
 It's designed to streamline your workflow by automating tedious tasks.
